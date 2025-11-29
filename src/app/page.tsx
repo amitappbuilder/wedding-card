@@ -82,7 +82,7 @@ export default function WeddingVideoCard() {
                     <p>...</p>
                     <p>Reception</p>
                     <p>18th April 2025</p>
-                    <p>Cocktail hours 7:00 PM onwards</p>
+                    <p>Cocktail hour 7:00 PM onwards</p>
                     <p>The Merion, NJ</p>
                 </div>
 
