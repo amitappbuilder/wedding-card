@@ -35,6 +35,7 @@ export default function WeddingVideoCard() {
             <div
                 className="relative w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl cursor-pointer"
                 onClick={toggleSound}
+                style={{ aspectRatio: '9/16', maxHeight: '92vh' }}   // ← NEW
             >
                 <video
                     ref={videoRef}
