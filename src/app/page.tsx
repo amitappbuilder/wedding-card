@@ -16,36 +16,36 @@ export default function WeddingVideoCard() {
 
     const toggleSound = () => {
         if (!videoRef.current) return;
-        const video = videoRef.current;
-
-        if (video.muted) {
-            video.muted = false;
+        const v = videoRef.current;
+        if (v.muted) {
+            v.muted = false;
             setIsMuted(false);
-            video.currentTime = 0;
-            video.play();
+            v.currentTime = 0;
+            v.play();
         } else {
-            video.muted = true;
+            v.muted = true;
             setIsMuted(true);
         }
     };
 
     return (
         <div
-            className="fixed inset-0 bg-black flex items-center justify-center"
+            className="fixed inset-0 bg-black overflow-hidden"
             onClick={toggleSound}
         >
-            {/* FULL-SCREEN VIDEO – NO CROPPING EVER */}
+            {/* MAGIC FIX: min() makes it letterbox instead of cropping */}
             <video
                 ref={videoRef}
                 src="/video/my-wedding-invitation.mp4"
-                className="w-full h-full object-cover"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-auto h-auto"
                 loop
                 playsInline
                 preload="auto"
+                style={{ objectFit: 'contain' }}
             />
 
-            {/* Sound icon – top right */}
-            <div className="absolute top-8 right-8 bg-white/20 backdrop-blur-lg p-4 rounded-full pointer-events-none z-10">
+            {/* Sound icon */}
+            <div className="absolute top-safe-8 right-8 bg-white/20 backdrop-blur-lg p-4 rounded-full pointer-events-none z-10">
                 {isMuted ? (
                     <VolumeX className="w-10 h-10 text-white" />
                 ) : (
@@ -53,14 +53,14 @@ export default function WeddingVideoCard() {
                 )}
             </div>
 
-            {/* Tap hint – only when muted */}
+            {/* Tap hint */}
             {isMuted && (
-                <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-black/60 text-white px-8 py-4 rounded-full text-xl font-medium pointer-events-none animate-pulse">
-                    Tap anywhere for music
+                <div className="absolute bottom-safe-16 left-1/2 -translate-x-1/2 bg-black/60 text-white px-8 py-4 rounded-full text-xl font-medium pointer-events-none animate-pulse">
+                    Tap for music
                 </div>
             )}
 
-            
+           
         </div>
     );
 }
